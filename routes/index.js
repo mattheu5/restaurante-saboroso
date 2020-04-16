@@ -44,7 +44,7 @@ router.post('/contacts', function(req, res, next){
 
     }).catch(err=>{
 
-      contacts.render(req, res, err)
+      contacts.render(req, res, err.message)
 
     })
 
@@ -95,7 +95,7 @@ router.post('/reservations', function(req, res, next){
 
     }).catch(err=>{
 
-      reservations.render(req, res, err)
+      reservations.render(req, res, err.message)
 
     })
 
