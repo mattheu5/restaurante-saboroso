@@ -198,3 +198,29 @@
     </div>
 
 <%- include('includes/footer') -%>
+
+
+<script src="/js/sinc-filereader.js"></script>   
+<script>
+
+let formCreate = document.querySelector('#modal-create form')
+
+formCreate.save().then(json => {
+
+  window.location.reload()
+  
+}).catch(err => {
+  console.log(err)
+})
+
+let formUpdate = document.querySelector("#modal-update form")
+
+  formUpdate.save().then(json => {
+
+  window.location.reload()
+  
+}).catch(err => {
+  console.log(err)
+})
+
+</script>
