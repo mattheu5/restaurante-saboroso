@@ -145,7 +145,7 @@
 <script>
 
   new SincFileReader('#modal-create [type=file]', '#modal-create img')
-  new SincFileReader('#modal-upload [type=file]', '#modal-update img')
+  new SincFileReader('#modal-update [type=file]', '#modal-update img')
 
   let formCreate = document.querySelector('#modal-create form')
 
@@ -186,7 +186,7 @@
       })
 
       .then(response => response.json())
-      .then(josn => {
+      .then(json => {
 
         
         window.location.reload()
