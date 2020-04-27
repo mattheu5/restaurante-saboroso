@@ -35,7 +35,9 @@ class SincFileReader {
             }
 
             reader.onerror = function() {
+
                 reject('Nâo foi possivel ler a imagem')
+
             }
              
             reader.readAsDataURL(file)

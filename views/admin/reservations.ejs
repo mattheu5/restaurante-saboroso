@@ -203,93 +203,13 @@
 
 
 <script src="/js/sinc-filereader.js"></script>
-<script src="/js/moment.min.js"></script> 
+<script src="/js/moment.min.js"></script>
+<script src="/js/sinc-grip.js"></script>
 <script>
 
-let formCreate = document.querySelector('#modal-create form')
-
-formCreate.save().then(json => {
-
-  window.location.reload()
-  
-}).catch(err => {
-  console.log(err)
-})
-
-let formUpdate = document.querySelector("#modal-update form")
-
-  formUpdate.save().then(json => {
-
-  window.location.reload()
-  
-}).catch(err => {
-  console.log(err)
-});
-
-[...document.querySelectorAll('.btn-update')].forEach(btn=>{
-
-btn.addEventListener('click', e =>{
-
-  let tr = e.path.find(el =>{
-
-    return (el.tagName.toUpperCase() === 'TR')
-
+  new SincGrid({
+    deleteUrl: '/admin/reservations/${data.id}',
+    deleteMsg: 'Você realmente deseja excluir a reserva de ${data.name}? :c'
   })
-
-  let data = JSON.parse(tr.dataset.row)
-
-  for (let name in data) {
-
-    let input =  formUpdate.querySelector(`[name=${name}]`)
-
-    switch(name) {
-
-      case 'date':
-      if (input) input.value = moment(data[name]).format('YYYY-MM-DD')
-      break
-      default: 
-        if (input) input.value = data[name]
-
-    }
-
-  }
-
-  $('#modal-update').modal('show')
-
-})
-
-});
-
-[...document.querySelectorAll('.btn-delete')].forEach(btn=>{
-
-btn.addEventListener('click', e=>{
-
-  let tr = e.path.find(el =>{
-
-    return (el.tagName.toUpperCase() === 'TR')
-
-  })
-
-  let data = JSON.parse(tr.dataset.row)
-  
-  
-  if(confirm(`Você realmente deseja excluir a reserva de ${data.name}? :c`)){
-
-    fetch(`/admin/reservations/${data.id}`, {
-      method: 'DELETE',
-    })
-
-    .then(response => response.json())
-    .then(json => {
-
-
-      window.location.reload()
-
-    })
-  }
-
-})  
-
-})
 
 </script>

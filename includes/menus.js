@@ -35,7 +35,7 @@ module.exports = {
 
             if (files.photo.name) {
 
-                query.photo = ',photo = ?'
+                queryPhoto = ',photo = ?'
 
                 params.push(fields.photo)
 
@@ -50,13 +50,13 @@ module.exports = {
                     SET title = ?,
                         description = ?,
                         price = ?,
-                        ${query.photo}
+                        ${queryPhoto}
                     WHERE id = ?
                 `
                 
             } else {
 
-                if(!fields.photo.name){
+                if(!files.photo.name){
                     reject('Envie a foto do prato.')
                 }
 
