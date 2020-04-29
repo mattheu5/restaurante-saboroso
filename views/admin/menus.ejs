@@ -141,98 +141,31 @@
     </div>
 
 <script src="/js/sinc-filereader.js"></script>    
-<script src="/js/sinc-formsave.js"></script>    
+<script src="/js/sinc-formsave.js"></script>   
+<script src="/js/sinc-grid.js"></script>   
 <script>
 
   new SincFileReader('#modal-create [type=file]', '#modal-create img')
   new SincFileReader('#modal-update [type=file]', '#modal-update img')
 
-  let formCreate = document.querySelector('#modal-create form')
+  new SincGrid({
+    deleteUrl: '/admin/menus/${data.id}',
+    deleteMsg: 'Você realmente deseja excluir ${data.title}? :c',
+    onUpdateLoad: (form, name, data) =>{
 
-  formCreate.save().then(json => {
-
-    window.location.reload()
-    
-  }).catch(err => {
-    console.log(err)
-  })
-
-  let formUpdate = document.querySelector('#modal-update form')
-
-    formUpdate.save().then(json => {
-
-    window.location.reload()
-    
-  }).catch(err => {
-    console.log(err)
-  });
-
-[...document.querySelectorAll('.btn-update')].forEach(btn=>{
-
-btn.addEventListener('click', e =>{
-
-  let tr = e.path.find(el =>{
-
-    return (el.tagName.toUpperCase() === 'TR')
-
-  })
-
-  let data = JSON.parse(tr.dataset.row)
-
-  for (let name in data) {
-
-    switch(name) {
-
-      case 'photo':
-        formUpdate.querySelector('img').src = '/'+data[name]
-      break
-      default: 
-        let input =  formUpdate.querySelector(`[name=${name}]`)
-        if (input) input.value = data[name]
-
-    }
-
-  }
-
-  $('#modal-update').modal('show')
-
-})
-
-});
-  
-
-[...document.querySelectorAll('.btn-delete')].forEach(btn=>{
-
-  btn.addEventListener('click', e=>{
-
-    let tr = e.path.find(el =>{
-
-      return (el.tagName.toUpperCase() === 'TR')
-
-    })
-
-    let data = JSON.parse(tr.dataset.row)
-
-    if(confirm(`Você realmente deseja excluir ${data.title}? :c`)){
-
-      fetch(`/admin/menus/${data.id}`, {
-        method: 'DELETE',
-      })
-
-      .then(response => response.json())
-      .then(json => {
-
+      let input = form.querySelector(`[name=${name}]`)
         
-        window.location.reload()
+            switch(name) {
 
-      })
+              case 'photo':
+                formUpdate.querySelector('img').src = '/'+ date[name]
+                break
+              default: 
+                if (input) input.value = data[name]
+        
+            }
     }
-  
-  })  
-
-});
-
-
+  })
 </script>
 
 <%- include('includes/footer') -%>

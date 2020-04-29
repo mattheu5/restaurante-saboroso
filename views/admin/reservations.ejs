@@ -210,6 +210,20 @@
   new SincGrid({
     deleteUrl: '/admin/reservations/${data.id}',
     deleteMsg: 'Você realmente deseja excluir a reserva de ${data.name}? :c',
+    onUpdateLoad: (form, name, data) =>{
+
+      let input = form.querySelector(`[name=${name}]`)
+        
+            switch(name) {
+
+              case 'date':
+                if (input) input.value = moment(data[name]).format('YYYY-MM-DD')
+                break
+              default: 
+                if (input) input.value = data[name]
+        
+            }
+    }
   })
 
 </script>
