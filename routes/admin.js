@@ -1,9 +1,10 @@
 var express = require('express')
-var users = require('./../includes/users')
 var admin = require('../includes/admin')
+var users = require('./../includes/users')
 var menus = require('./../includes/menus')
-var moment = require('moment')
+var contacts = require('./../includes/contacts');
 var reservations = require('./../includes/reservations')
+var moment = require('moment')
 var router = express.Router()
 
 moment.locale('pt-BR')
@@ -81,7 +82,29 @@ router.get('/login', function(req, res, next){
 
 router.get('/contacts', function(req, res, next){
 
+    contacts.getContacts().then(data => {
+
+        res.render('admin/contacts', admin.getParams(req, {
+            data
+        }))
+
+    })
+
     res.render('admin/contacts', admin.getParams(req))
+
+})
+
+router.delete('/contacts/:id', function(req, res, next){
+
+    contacts.delete(req.params.id).then(results =>{
+
+        res.send(results)
+    
+    }).catch(err =>{
+
+        res.send(err)
+
+    })
 
 })
 
@@ -119,11 +142,11 @@ router.get('/menus', function(req, res, next){
 
 router.delete('/menus/:id', function(req, res, next){
 
-    menus.delete(req.params.id).then((results) => {
+    menus.delete(req.params.id).then(results => {
 
         res.send(results)
 
-    }).catch((err) => {
+    }).catch(err => {
 
         res.send(err)
 
@@ -161,11 +184,11 @@ router.post('/reservations', function(req, res, next){
 
 router.delete('/reservations/:id', function(req, res, next){
 
-    reservations.delete(req.params.id).then((results) => {
+    reservations.delete(req.params.id).then(results => {
 
         res.send(results)
 
-    }).catch((err) => {
+    }).catch(err => {
 
         res.send(err)
 
@@ -197,6 +220,22 @@ router.post('/users', function(req, res, next){
 
     })
 
+})
+
+router.post('/users/password-change', function(req, res, next) {
+
+    users.changePassword(req).then(results =>{
+
+        res.send(results)
+
+    }).catch(err =>{
+
+        res.send({
+            error: err
+        })
+
+    })  
+    
 })
 
 router.delete('/users/:id', function(req, res, next){
