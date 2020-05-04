@@ -1,8 +1,8 @@
 var express = require('express')
-var conn = require('./../includes/db')
 var menus = require('./../includes/menus')
 var contacts = require('./../includes/contacts')
 var reservations = require('./../includes/reservations')
+var emails = require('./../includes/emails')
 var router = express.Router()
 
 /* GET home page. */
@@ -111,6 +111,19 @@ router.get('/services', function(req, res, next){
     h1: 'É um prazer poder servir!'
   })
 
+})
+
+router.post('/sub', function(req, res, next){
+
+  emails.save(req).then(results=>{
+
+    res.send(results)
+
+  }).catch(err=>{
+    
+    res.send(err)
+
+  })
 })
 
 module.exports = router

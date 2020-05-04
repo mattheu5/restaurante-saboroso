@@ -13,9 +13,9 @@ module.exports = {
 
                 if (err){
                     reject(err)
-                }
-        
-                resolve(results)
+                } else {                
+                    resolve(results)               
+                }        
 
             })
 
