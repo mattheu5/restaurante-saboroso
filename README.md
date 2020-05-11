@@ -3,7 +3,7 @@
 
 LINGUAGENS UTILIZADAS =>
 
-/p JavaScript 
+JavaScript 
 Node JS
 MYSQL
 Express JS
