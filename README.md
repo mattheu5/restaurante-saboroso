@@ -3,4 +3,9 @@
 
 LINGUAGENS UTILIZADAS =>
 
-JavaScript, Node JS, MYSQL, Express JS, Socket IO, Webpack.
+JavaScript 
+Node JS
+MYSQL
+Express JS
+Socket IO
+Webpack
